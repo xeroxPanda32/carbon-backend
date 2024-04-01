@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const passport = require('./passport/jwt-strategy')
 const authRoute = require('./routes/auth');
+const publicRoute = require('./routes/publicApi')
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authRoute);
+app.use('/public', publicRoute)
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
