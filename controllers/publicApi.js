@@ -19,6 +19,9 @@ const getCategories = async (req, res) => {
 
 const getEntries = async (req, res) => {
   const { category } = req.query
+  if (!category) {
+    return res.status(404).send('Please provide category')
+  }
   const limit = req.query.limit || 100 // return a maximum of 100 entries
   try {
     const response = await axios.get(`${PUBLIC_API_BASE_URL}/entries?category=${category}`)
